@@ -10,6 +10,20 @@ class CartItem extends React.Component{
             qty:'1',
             img:''
         }
+
+        //another way to bind is:-bind here like this and remove the binding from event and bind here in constructor
+        //this.increaseQuantity=this.increaseQuantity.bind(this)
+
+        //or another way is to use arrow funtions:-so whenever we are using arrow functions,arrow function will automa
+        //-tically bind the value of this to the instace of this class
+
+    }
+    // increaseQuantity (){
+    //     console.log('this.state',this.state); it can be used for binding during event or constructor
+    // }
+
+    increaseQuantity=() =>{
+        console.log('this.state',this.state);
     }
     render(){
         //this method should return some jsx
@@ -25,9 +39,25 @@ class CartItem extends React.Component{
                     <div style={ {color:'#777' } } >Qty: {qty}</div>
                     <div className='cart-items-actions'>
                         {/* {buttons} */}
-                        <img alt="increase" className="action-icons" src="https://image.flaticon.com/icons/png/512/992/992651.png" />
-                        <img alt="decrease" className="action-icons" src="https://image.flaticon.com/icons/png/512/992/992683.png" />
-                        <img alt="delete" className="action-icons" src="https://img-premium.flaticon.com/png/512/484/premium/484662.png?token=exp=1627990535~hmac=25e8032629bb5987a8b2ffda56995491" />
+                        <img
+                        alt="increase" 
+                        className="action-icons" 
+                        src="https://image.flaticon.com/icons/png/512/992/992651.png" 
+                        //onClick={this.increaseQuantity.bind(this)}
+                        onClick={this.increaseQuantity} //using arrow function so not required to bind
+                        />
+
+                        <img 
+                        alt="decrease" 
+                        className="action-icons" 
+                        src="https://image.flaticon.com/icons/png/512/992/992683.png" 
+                        />
+
+                        <img 
+                        alt="delete" 
+                        className="action-icons" 
+                        src="https://img-premium.flaticon.com/png/512/484/premium/484662.png?token=exp=1627990535~hmac=25e8032629bb5987a8b2ffda56995491" 
+                        />
                     </div>
                 </div>
             </div>
