@@ -7,7 +7,7 @@ class CartItem extends React.Component{
         this.state={
             price:'999',
             title:'Mobile Phone',
-            qty:'1',
+            qty:1,
             img:''
         }
 
@@ -23,7 +23,29 @@ class CartItem extends React.Component{
     // }
 
     increaseQuantity=() =>{
+        //this.state.qty +=1; this will increase the qty in state but react will not know about it that's why we need 
+        //to use setState fn wich is imported from component class.setState helps react to know about increased value
+        //and render it
         console.log('this.state',this.state);
+        //we can use setState in two ways 
+        //1st:-
+        // this.setState({
+        //     qty:this.state.qty + 1 //shallow merging :-only changing the property that i want to change
+        // });
+        //2nd form:-instead of passing an object we can pass a fn wich is a callback,this fn will be called by react internally
+        //and whem react does that it will pass the previous state to us
+        this.setState((prevState)=>{
+            return{
+                qty:prevState.qty+1
+            }
+        });
+    }
+    decreaseQuantity=()=>{
+        this.setState((prevState)=>{
+            return{
+                qty:prevState.qty-1
+            }
+        });
     }
     render(){
         //this method should return some jsx
@@ -51,6 +73,7 @@ class CartItem extends React.Component{
                         alt="decrease" 
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/png/512/992/992683.png" 
+                        onClick={this.decreaseQuantity}
                         />
 
                         <img 
