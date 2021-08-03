@@ -1,20 +1,33 @@
 import React from 'react';
 
 class CartItem extends React.Component{
-    //for a class component to be a react component we need to give it one method
+    //for a class component to be a react component we need to give it one method that is render here
+    constructor(){
+        super();//we first need to call the constructor of parent class i.e constructor of component class in react
+        this.state={
+            price:'999',
+            title:'Mobile Phone',
+            qty:'1',
+            img:''
+        }
+    }
     render(){
         //this method should return some jsx
+        const { price,title,qty}=this.state; //by this i am telling i want this properties from this object:-state
         return(
             <div className='cart-item'>
                 <div class='left-block'>
                     <img style={styles.image} />
                 </div>
                 <div className='right-block'>
-                    <div style={ { fontSize:25 } } >Phone</div>
-                    <div style={ { color:'#777' } } >Rs 999</div>
-                    <div style={ {color:'#777' } } >Qty : 1</div>
+                    <div style={ { fontSize:25 } } >{this.state.title}</div>
+                    <div style={ { color:'#777' } } >Rs {price}</div>
+                    <div style={ {color:'#777' } } >Qty: {qty}</div>
                     <div className='cart-items-actions'>
                         {/* {buttons} */}
+                        <img alt="increase" className="action-icons" src="https://image.flaticon.com/icons/png/512/992/992651.png" />
+                        <img alt="decrease" className="action-icons" src="https://image.flaticon.com/icons/png/512/992/992683.png" />
+                        <img alt="delete" className="action-icons" src="https://img-premium.flaticon.com/png/512/484/premium/484662.png?token=exp=1627990535~hmac=25e8032629bb5987a8b2ffda56995491" />
                     </div>
                 </div>
             </div>
