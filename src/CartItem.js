@@ -2,22 +2,26 @@ import React from 'react';
 
 class CartItem extends React.Component{
     //for a class component to be a react component we need to give it one method that is render here
-    constructor(){
-        super();//we first need to call the constructor of parent class i.e constructor of component class in react
-        this.state={
-            price:'999',
-            title:'Mobile Phone',
-            qty:1,
-            img:''
-        }
 
-        //another way to bind is:-bind here like this and remove the binding from event and bind here in constructor
-        //this.increaseQuantity=this.increaseQuantity.bind(this)
+    // constructor(){
+    //     super();we first need to call the constructor of parent class i.e constructor of component class in react
+    //     this.state={
+    //         price:'999',
+    //         title:'Mobile Phone',
+    //         qty:1,
+    //         img:''
+    //     }
 
-        //or another way is to use arrow funtions:-so whenever we are using arrow functions,arrow function will automa
-        //-tically bind the value of this to the instace of this class
+    //     //another way to bind is:-bind here like this and remove the binding from event and bind here in constructor
+    //     //this.increaseQuantity=this.increaseQuantity.bind(this)
 
-    }
+    //     //or another way is to use arrow funtions:-so whenever we are using arrow functions,arrow function will automa
+    //     //-tically bind the value of this to the instace of this class
+
+
+    //after using props we dont need state here:-so commenting it
+    // }
+
     // increaseQuantity (){
     //     console.log('this.state',this.state); it can be used for binding during event or constructor
     // }
@@ -53,14 +57,17 @@ class CartItem extends React.Component{
     }
     render(){
         //this method should return some jsx
-        const { price,title,qty}=this.state; //by this i am telling i want this properties from this object:-state
+       // const { price,title,qty}=this.state; by this i am telling i want this properties from this object:-state
+       console.log(this.props);
+       const { price,title,qty}=this.props.product;
         return(
             <div className='cart-item'>
-                <div class='left-block'>
+                <div className='left-block'>
                     <img style={styles.image} />
                 </div>
                 <div className='right-block'>
-                    <div style={ { fontSize:25 } } >{this.state.title}</div>
+                    {/* <div style={ { fontSize:25 } } >{this.state.title}</div>  just another way*/}
+                    <div style={ { fontSize:25 } } >{title}</div>
                     <div style={ { color:'#777' } } >Rs {price}</div>
                     <div style={ {color:'#777' } } >Qty: {qty}</div>
                     <div className='cart-items-actions'>
