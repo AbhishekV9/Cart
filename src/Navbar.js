@@ -6,12 +6,12 @@ import React from 'react';
             <div style={styles.nav}>
                 <div style={styles.cartIconContainer}>
                     <img style={styles.cartIcon} src="https://image.flaticon.com/icons/png/512/3144/3144456.png" alt="cart-icon"/>
-                    <span style={styles.cartCount}>3</span>
+                    <span style={styles.cartCount}>{props.count}</span>
                 </div>
             </div>
         );
     }
-
+ 
 
 
 const styles={
