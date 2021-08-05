@@ -39,11 +39,23 @@ class Cart extends React.Component{
         this.setState({
             //products:products
             //first products is the property of the state that we want to change and second products is that
-            //we have in this function,when both have same variable name i can write like product only this means
+            //we have in this function which we want to send,when both have same variable name i can write like product only this means
             //products:products only
             products
 
-        })
+        });
+    }
+    handleDecreaseQuantity=(product) =>{
+        const {products}=this.state;
+        const index=products.indexOf(product);
+        if(products[index].qty==0){
+            return;
+        }
+        products[index].qty -=1;
+        this.setState({
+            products
+        });
+        
     }
    render(){
        const { products } = this.state;
@@ -58,6 +70,7 @@ class Cart extends React.Component{
                  product={product} 
                  key={product.id}
                  onIncreaseQuantity={this.handleIncreaseQuantity} 
+                 onDecreaseQuantity={this.handleDecreaseQuantity}
                  />  
                  )
              })}
