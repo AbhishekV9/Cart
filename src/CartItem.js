@@ -1,60 +1,7 @@
 import React from 'react';
 
 class CartItem extends React.Component{
-    //for a class component to be a react component we need to give it one method that is render here
-
-    // constructor(){
-    //     super();we first need to call the constructor of parent class i.e constructor of component class in react
-    //     this.state={
-    //         price:'999',
-    //         title:'Mobile Phone',
-    //         qty:1,
-    //         img:''
-    //     }
-
-    //     //another way to bind is:-bind here like this and remove the binding from event and bind here in constructor
-    //     //this.increaseQuantity=this.increaseQuantity.bind(this)
-
-    //     //or another way is to use arrow funtions:-so whenever we are using arrow functions,arrow function will automa
-    //     //-tically bind the value of this to the instace of this class
-
-
-    //after using props we dont need state here:-so commenting it
-    // }
-
-    // increaseQuantity (){
-    //     console.log('this.state',this.state); it can be used for binding during event or constructor
-    // }
-
-    increaseQuantity=() =>{
-        //this.state.qty +=1; this will increase the qty in state but react will not know about it that's why we need 
-        //to use setState fn wich is imported from component class.setState helps react to know about increased value
-        //and render it
-        console.log('this.state',this.state);
-        //we can use setState in two ways 
-        //1st:-
-        // this.setState({
-        //     qty:this.state.qty + 1 //shallow merging :-only changing the property that i want to change
-        // });
-        //2nd form:-instead of passing an object we can pass a fn wich is a callback,this fn will be called by react internally
-        //and whem react does that it will pass the previous state to us
-        this.setState((prevState)=>{
-            return{
-                qty:prevState.qty+1
-            }
-        });
-    }
-    decreaseQuantity=()=>{
-        const{qty}=this.state;
-        if(qty===0){
-            return
-        }
-        this.setState((prevState)=>{
-            return{
-                qty:prevState.qty-1
-            }
-        });
-    }
+    
     render(){
         //this method should return some jsx
        // const { price,title,qty}=this.state; by this i am telling i want this properties from this object:-state
@@ -77,7 +24,8 @@ class CartItem extends React.Component{
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/png/512/992/992651.png" 
                         //onClick={this.increaseQuantity.bind(this)}
-                        onClick={this.increaseQuantity} //using arrow function so not required to bind
+                       // onClick={this.increaseQuantity} //using arrow function so not required to bind
+                          onClick={()=>this.props.onIncreaseQuantity(this.props.product)}
                         />
 
                         <img 

@@ -31,6 +31,20 @@ class Cart extends React.Component{
         }
        
     }
+    handleIncreaseQuantity=(product)=>{
+        console.log('increase qty of',product);
+        const {products} =this.state;
+        const index=products.indexOf(product);
+        products[index].qty +=1;
+        this.setState({
+            //products:products
+            //first products is the property of the state that we want to change and second products is that
+            //we have in this function,when both have same variable name i can write like product only this means
+            //products:products only
+            products
+
+        })
+    }
    render(){
        const { products } = this.state;
        return(
@@ -42,7 +56,9 @@ class Cart extends React.Component{
                  return (
                  <CartItem 
                  product={product} 
-                 key={product.id}/>  
+                 key={product.id}
+                 onIncreaseQuantity={this.handleIncreaseQuantity} 
+                 />  
                  )
              })}
          </div>
