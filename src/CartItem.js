@@ -7,6 +7,7 @@ class CartItem extends React.Component{
        // const { price,title,qty}=this.state; by this i am telling i want this properties from this object:-state
        console.log(this.props);
        const { price,title,qty}=this.props.product;
+       const{product,onIncreaseQuantity,onDecreaseQuantity,onDeleteProduct}=this.props
         return(
             <div className='cart-item'>
                 <div className='left-block'>
@@ -24,21 +25,25 @@ class CartItem extends React.Component{
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/png/512/992/992651.png" 
                         //onClick={this.increaseQuantity.bind(this)}
+
                        // onClick={this.increaseQuantity} //using arrow function so not required to bind
-                          onClick={()=>this.props.onIncreaseQuantity(this.props.product)}
+
+                        //  onClick={()=>this.props.onIncreaseQuantity(this.props.product)} if i haven't done like  onClick={()=>this.props.onIncreaseQuantity(this.props.product)} then i have to write like this
+                          onClick={()=>onIncreaseQuantity(product)}
                         />
 
                         <img 
                         alt="decrease" 
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/png/512/992/992683.png" 
-                        onClick={()=> this.props.onDecreaseQuantity(this.props.product)}
+                        onClick={()=> onDecreaseQuantity(product)}
                         />
 
                         <img 
                         alt="delete" 
                         className="action-icons" 
                         src="https://img-premium.flaticon.com/png/512/484/premium/484662.png?token=exp=1628010003~hmac=e12126e61f3fc0bb430c92b349acffe1" 
+                        onClick={()=> onDeleteProduct(product.id)}
                         />
                     </div>
                 </div>
