@@ -70,18 +70,35 @@ componentDidMount(){
  
 }
 handleIncreaseQuantity=(product)=>{
-    console.log('increase qty of',product);
+    // console.log('increase qty of',product);
+
     const {products} =this.state;
     const index=products.indexOf(product);
-    products[index].qty +=1;
-    this.setState({
-        //products:products
-        //first products is the property of the state that we want to change and second products is that
-        //we have in this function which we want to send,when both have same variable name i can write like product only this means
-        //products:products only
-        products
 
-    });
+    //instead of increasing quantity to the state we will increase quantity in firebase and then onsnapsot will be called
+    //and it will automatically set our state
+
+    // products[index].qty +=1;
+    // this.setState({
+    //    // products:products
+    //    // first products is the property of the state that we want to change and second products is that
+    //    // we have in this function which we want to send,when both have same variable name i can write like product only this means
+    //    // products:products only
+    //     products
+
+    // });
+
+    const docRef=this.db.collection('products').doc(products[index].id); //using this we will get the refference of the product whose qty we want to increase
+    docRef
+    .update({
+      qty:products[index].qty+1
+    })
+    .then(()=>{
+      console.log('Updated Sucessfully')
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
 }
 handleDecreaseQuantity=(product) =>{
     const {products}=this.state;
@@ -89,10 +106,21 @@ handleDecreaseQuantity=(product) =>{
     if(products[index].qty===0){
         return;
     }
-    products[index].qty -=1;
-    this.setState({
-        products
-    });
+    // products[index].qty -=1;
+    // this.setState({
+    //     products
+    // });
+    const docRef=this.db.collection('products').doc(products[index].id);
+    docRef
+    .update({
+      qty:products[index].qty -1
+    })
+    .then(()=>{
+      console.log('Updated Sucessfully');
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
     
 }
 handleDeleteProduct=(id)=>{
@@ -147,7 +175,7 @@ addProduct=()=>{
     return (
       <div className="App">
         <Navbar count={this.getCartCount()} />
-        <button onClick={this.addProduct} style={{padding:20,fontSize:20}}>Add a  product</button>
+        {/* <button onClick={this.addProduct} style={{padding:20,fontSize:20}}>Add a  product</button> */}
         <Cart
             products={products}
             onIncreaseQuantity={this.handleIncreaseQuantity} 
