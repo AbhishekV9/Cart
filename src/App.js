@@ -125,11 +125,27 @@ handleDecreaseQuantity=(product) =>{
 }
 handleDeleteProduct=(id)=>{
     const {products}=this.state;
-    const items=products.filter((item)=>item.id!==id);//this line will return an array and this array will contain
-    //products whose id is not equal to the id wich is being passed to this function
-    this.setState({
-        products:items
+    //instead of deleting and then setting state we will delete it from firebase 
+
+    // const items=products.filter((item)=>item.id!==id);//this line will return an array and this array will contain
+    // //products whose id is not equal to the id wich is being passed to this function
+    // this.setState({
+    //     products:items   deleting products from firebase
+    // })
+
+    const docRef=this.db.collection('products').doc(id);
+    docRef
+    .delete()
+    .then(()=>{
+      console.log('Updated Sucessfully');
     })
+    .catch((error)=>{
+      console.log(error);
+    })
+
+
+
+
 }
 
 getCartCount=()=>{
