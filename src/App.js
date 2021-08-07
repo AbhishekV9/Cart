@@ -48,6 +48,9 @@ componentDidMount(){
 //getti ng the data with attaching listner
   this.db   
   .collection('products') 
+  // .where('price','>=',499)//querifyig the data
+  // .where('title','==','Keyboard')
+  .orderBy('price','asc')  //sort the data acc to price,asc is by default
   .onSnapshot((snapshot)=>{  //on snapshot is called with first snapshop nad then whenever there is some change in our product collection
       console.log(snapshot);
   
