@@ -17,29 +17,54 @@ class App extends React.Component {
 
 //getting the data from firebase
 componentDidMount(){
+  // firebase
+  // .firestore()     //because we are getting the data from firestore
+  // .collection('products') //chaining functions
+  // .get()                  //get returns a promise
+  // .then((snapshot)=>{
+  //   console.log(snapshot);
+
+  //   snapshot.docs.map((doc)=>{
+  //     console.log(doc.data());
+  //   })
+
+  //   const products=snapshot.docs.map((doc)=>{
+  //     const data=doc.data();
+  //     data['id']=doc.id;
+  //     return data;
+  //   })
+
+  //   this.setState({
+  //     products,
+  //     loading:false
+  //   })
+
+  // })
+
+
   firebase
-  .firestore()     //because we are getting the data from firestore
-  .collection('products') //chaining functions
-  .get()                  //get returns a promise
-  .then((snapshot)=>{
-    console.log(snapshot);
-
-    snapshot.docs.map((doc)=>{
-      console.log(doc.data());
+  .firestore()     
+  .collection('products') 
+  .onSnapshot((snapshot)=>{  //on snapshot is called with first snapshop nad then whenever there is some change in our product collection
+      console.log(snapshot);
+  
+      snapshot.docs.map((doc)=>{
+        console.log(doc.data());
+      })
+  
+      const products=snapshot.docs.map((doc)=>{
+        const data=doc.data();
+        data['id']=doc.id;
+        return data;
+      })
+  
+      this.setState({
+        products,
+        loading:false
+      })
+  
     })
-
-    const products=snapshot.docs.map((doc)=>{
-      const data=doc.data();
-      data['id']=doc.id;
-      return data;
-    })
-
-    this.setState({
-      products,
-      loading:false
-    })
-
-  })
+ 
 }
 handleIncreaseQuantity=(product)=>{
     console.log('increase qty of',product);
