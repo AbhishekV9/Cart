@@ -12,11 +12,15 @@ class App extends React.Component {
         loading:true
 
     }
+    this.db=firebase.firestore();
    
 }
 
-//getting the data from firebase
+
 componentDidMount(){
+  //just getting the data from firebase
+
+
   // firebase
   // .firestore()     //because we are getting the data from firestore
   // .collection('products') //chaining functions
@@ -41,9 +45,8 @@ componentDidMount(){
 
   // })
 
-
-  firebase
-  .firestore()     
+//getti ng the data with attaching listner
+  this.db   
   .collection('products') 
   .onSnapshot((snapshot)=>{  //on snapshot is called with first snapshop nad then whenever there is some change in our product collection
       console.log(snapshot);
@@ -122,11 +125,29 @@ getCartTotal=()=>{
   return cartTotal;
 }
 
+addProduct=()=>{
+  this.db
+  .collection('products')
+  .add({ //.add will give me a promise with refference of this object
+    img:'',
+    price:999,
+    qty:3,
+    title:'Washing Machine'
+  })
+  .then((docRef)=>{ //docref will have that refference
+    console.log(docRef);
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
+}
+
   render (){
     const {products,loading}=this.state;
     return (
       <div className="App">
         <Navbar count={this.getCartCount()} />
+        <button onClick={this.addProduct} style={{padding:20,fontSize:20}}>Add a  product</button>
         <Cart
             products={products}
             onIncreaseQuantity={this.handleIncreaseQuantity} 
